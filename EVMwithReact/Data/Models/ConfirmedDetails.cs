@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EVMwithReact.Data.Models
 {
@@ -8,8 +9,9 @@ namespace EVMwithReact.Data.Models
 		[Key]
 		public int CDId { get; set; } //To store the unique id
 
-		public User user { get; set; } //Foreign key mapped to User Details
-		public Appointment appointment { get; set; }	// Foreign key mapped to Appointments
+        public string userId { get; set; } //id of the current User
+
+        public string appointmentId { get; set; }	// id of the selected appointment
 	}
 }
 
