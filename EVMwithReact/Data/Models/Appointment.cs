@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EVMwithReact.Data.Models
 {
@@ -13,10 +14,8 @@ namespace EVMwithReact.Data.Models
         public DateTime AppointmentDate { get; set; }
         [Required]
         public TimeSpan AppointmentTime { get; set; }
-        //// Foreign key to Company
-        
-        public int CompanyId { get; set; }
-        
+
+        public int CompanyId { get; set; }  //id of the company that posted the appointment
         
 	}
 }

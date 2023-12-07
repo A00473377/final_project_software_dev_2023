@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EVMwithReact.Data.Models
 {
     public class Payment
@@ -13,7 +15,7 @@ namespace EVMwithReact.Data.Models
 
         public string EmailAddress { get; set; }
 
-        // Add other properties as needed for your specific requirements
+        public string userId { get; set; }  //Id of the user who made the payment
     }
 
 }
