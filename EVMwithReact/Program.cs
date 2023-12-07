@@ -11,6 +11,20 @@ builder.Services.AddDbContext<EVMwithReactContext>(options =>
 
 builder.Services.AddControllersWithViews();
 
+//to fix the cors error
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ReactPolicy",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+//code end for fix
+
+
 var app = builder.Build();
 
 //the code to initialise the seedData class for some data
@@ -33,7 +47,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
+app.UseCors("ReactPolicy");// to fix the cors error
 
 app.MapControllerRoute(
     name: "default",

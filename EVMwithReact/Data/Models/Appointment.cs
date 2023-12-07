@@ -7,7 +7,7 @@ namespace EVMwithReact.Data.Models
 	public class Appointment
 	{
         [Key]
-        public int AppointmentId { get; set; }
+        public int  AppointmentId { get; set; }
 
 
         [Required]
