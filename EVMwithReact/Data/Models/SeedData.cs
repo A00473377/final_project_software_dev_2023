@@ -26,45 +26,23 @@ public static class SeedData
 
             context.Branches.AddRange(branch1, branch2);
 
-            context.SaveChanges();
-
-            //context.Appointments.AddRange(
-            //    new Appointment
-            //    {
-            //        AppointmentDate = DateTime.Now.Date.AddDays(1),
-            //        AppointmentTime = new TimeSpan(10, 0, 0),
-            //        CompanyId = branch1.CompanyId
-            //    },
-            //    new Appointment
-            //    {
-            //        AppointmentDate = DateTime.Now.Date.AddDays(2),
-            //        AppointmentTime = new TimeSpan(14, 30, 0),
-            //        CompanyId = company2.CompanyId
-            //    },
-            //    new Appointment
-            //    {
-            //        AppointmentDate = DateTime.Now.Date.AddDays(4),
-            //        AppointmentTime = new TimeSpan(6, 30, 0),
-            //        CompanyId = comp3.CompanyId
-            //    }
-            //    // Add more sample appointments as needed
-            //);
+            //context.SaveChanges();
 
             var companyId = comp3.BranchId; // Assuming comp3 is an instance of Company with a valid CompanyId
 
-            List<Appointment> appointments = new List<Appointment>();
-            for (int i = 0; i < 15; i++)
-            {
-                var appointment = new Appointment
-                {
-                    AppointmentDate = DateTime.Now.Date.AddDays(i * 2), // Adjust the date logic as needed
-                    AppointmentTime = new TimeSpan(6, 30, 0),
-                    BranchId = companyId
-                };
+            //List<Appointment> appointments = new List<Appointment>();
+            //for (int i = 0; i < 15; i++)
+            //{
+            //    var appointment = new Appointment
+            //    {
+            //        AppointmentDate = DateTime.Now.Date.AddDays(i * 2), // Adjust the date logic as needed
+            //        AppointmentTime = new TimeSpan(6, 30, 0),
+            //        BranchId = companyId
+            //    };
 
-                appointments.Add(appointment);
-            }
-            context.Appointments.AddRange(appointments);
+            //    appointments.Add(appointment);
+            //}
+            //context.Appointments.AddRange(appointments);
 
             context.SaveChanges();
         }

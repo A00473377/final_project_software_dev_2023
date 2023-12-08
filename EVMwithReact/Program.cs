@@ -5,7 +5,7 @@ using EVMwithReact.Data.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<EVMwithReactContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("EVMwithReactContext") ?? throw new InvalidOperationException("Connection string 'EVMwithReactContext' not found.")));
+    options.UseMySQL(builder.Configuration.GetConnectionString("EVMwithReactContext") ?? throw new InvalidOperationException("Connection string 'EVMwithReactContext' not found.")));
 
 // Add services to the container.
 
