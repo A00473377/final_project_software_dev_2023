@@ -1,12 +1,17 @@
-﻿using System;
+﻿//Change Log:
+//Changed the Model Name to Branch.
+//
+//
+
+using System;
 using System.ComponentModel.DataAnnotations;
 namespace EVMwithReact.Data.Models
 {
-    public class Company
+    public class Branch
     {
-        public int CompanyId { get; set; }
+        public int BranchId { get; set; }
 
-        public string CompanyName { get; set; }
+        public string BranchName { get; set; }
         
         public string Address { get; set; }
 

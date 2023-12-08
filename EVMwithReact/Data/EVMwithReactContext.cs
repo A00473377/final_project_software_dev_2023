@@ -19,6 +19,7 @@ namespace EVMwithReact.Data
         public DbSet<EVMwithReact.Data.Models.Transaction> Transactions { get; set; }
         public DbSet<EVMwithReact.Data.Models.ConfirmedDetails> ConfirmedDetails { get; set; }
         public DbSet<EVMwithReact.Data.Models.Payment> Payments { get; set; }
-        public DbSet<EVMwithReact.Data.Models.Company> Companies { get; set; }
+        public DbSet<EVMwithReact.Data.Models.Branch> Branches { get; set; }
+        public object Branch { get; internal set; }
     }
 }

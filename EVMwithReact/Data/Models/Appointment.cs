@@ -8,14 +8,12 @@ namespace EVMwithReact.Data.Models
 	{
         [Key]
         public int  AppointmentId { get; set; }
-
-
         [Required]
         public DateTime AppointmentDate { get; set; }
         [Required]
         public TimeSpan AppointmentTime { get; set; }
 
-        public int CompanyId { get; set; }  //id of the company that posted the appointment
+        public int BranchId { get; set; }  //id of the branch that posted the appointment
         
 	}
 }
