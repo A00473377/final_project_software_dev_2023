@@ -27,12 +27,12 @@ namespace EVMwithReact.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Companies",
+                name: "Branches",
                 columns: table => new
                 {
-                    CompanyId = table.Column<int>(type: "INTEGER", nullable: false)
+                    BranchId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CompanyName = table.Column<string>(type: "TEXT", nullable: false),
+                    BranchName = table.Column<string>(type: "TEXT", nullable: false),
                     Address = table.Column<string>(type: "TEXT", nullable: false),
                     City = table.Column<string>(type: "TEXT", nullable: false),
                     State = table.Column<string>(type: "TEXT", nullable: false),
@@ -42,7 +42,7 @@ namespace EVMwithReact.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Companies", x => x.CompanyId);
+                    table.PrimaryKey("PK_Branches", x => x.BranchId);
                 });
 
             migrationBuilder.CreateTable(

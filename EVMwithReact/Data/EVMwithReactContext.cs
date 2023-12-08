@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using MySql.EntityFrameworkCore.Extensions;
 using EVMwithReact.Data.Models;
 
 namespace EVMwithReact.Data
@@ -14,11 +15,12 @@ namespace EVMwithReact.Data
         {
         }
 
-        public DbSet<EVMwithReact.Data.Models.User> User { get; set; } = default!;
+        public DbSet<EVMwithReact.Data.Models.User> Users { get; set; } = default!;
         public DbSet<EVMwithReact.Data.Models.Appointment> Appointments { get; set; }
         public DbSet<EVMwithReact.Data.Models.Transaction> Transactions { get; set; }
         public DbSet<EVMwithReact.Data.Models.ConfirmedDetails> ConfirmedDetails { get; set; }
         public DbSet<EVMwithReact.Data.Models.Payment> Payments { get; set; }
-        public DbSet<EVMwithReact.Data.Models.Company> Companies { get; set; }
+        public DbSet<EVMwithReact.Data.Models.Branch> Branches { get; set; }
+        public object Branch { get; internal set; }
     }
 }

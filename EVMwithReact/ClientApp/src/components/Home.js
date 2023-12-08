@@ -122,7 +122,9 @@ const Home = ({ onLoginClick }) => {
                 UserName: `test123`, // Creating a username from the name
                 Email: email,
                 PhoneNo: "123-456-7890", // Placeholder phone number
-                Address: "123 Main St", // Placeholder address
+                City: "123 CITY", // Placeholder address
+                State:"Nova Scotia",
+                Country: "Canada",
                 Password: password,
             };
             fetch("https://localhost:7278/api/Registration", {
