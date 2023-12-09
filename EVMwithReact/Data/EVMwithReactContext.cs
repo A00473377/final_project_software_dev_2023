@@ -21,6 +21,7 @@ namespace EVMwithReact.Data
         public DbSet<EVMwithReact.Data.Models.ConfirmedDetails> ConfirmedDetails { get; set; }
         public DbSet<EVMwithReact.Data.Models.Payment> Payments { get; set; }
         public DbSet<EVMwithReact.Data.Models.Branch> Branches { get; set; }
+        public DbSet<EVMwithReact.Data.Models.CheckUserLogin> CheckUserLogins { get; set; }
         public object Branch { get; internal set; }
     }
 }
