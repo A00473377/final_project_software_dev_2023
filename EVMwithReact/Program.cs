@@ -5,7 +5,11 @@ using EVMwithReact.Data.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<EVMwithReactContext>(options =>
+<<<<<<< HEAD
     options.UseMySQL(builder.Configuration.GetConnectionString("EVMwithReactContext") ?? throw new InvalidOperationException("Connection string 'EVMwithReactContext' not found.")));
+=======
+    options.UseSqlServer(builder.Configuration.GetConnectionString("EVMwithReactContext") ?? throw new InvalidOperationException("Connection string 'EVMwithReactContext' not found.")));
+>>>>>>> origin/sammy_dev
 
 // Add services to the container.
 
@@ -28,12 +32,12 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 //the code to initialise the seedData class for some data
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
 
-    SeedData.Initialize(services);
-}
+//    SeedData.Initialize(services);
+//}
 //code end for seedData
 
 // Configure the HTTP request pipeline.
