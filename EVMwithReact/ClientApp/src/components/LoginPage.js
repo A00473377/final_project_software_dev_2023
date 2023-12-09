@@ -45,19 +45,23 @@ function LoginPage({ onRegisterClick, onLoginSuccess }) {
     };
     const login = async (email, password) => {
         try {
-            const response = await axios.post("https://sid816.free.beeceptor.com", {
+            const response = await axios.post("api/Registration/CheckUser", {
                 email,
                 password,
             });
-            cookie.set("email", email);
-            onLoginSuccess();
-            if (response.data.success) {
+            
+            if (response.status === 200) {
+                cookie.set("email", email);
                 console.log("Success");
+                onLoginSuccess();
             } else {
                 console.log("Incorrect");
+                console.log(response);
+                alert("Incorrect Credentials");
             }
         } catch (error) {
             console.error("Error during API call", error);
+            alert("Incorrect Credentials");
         }
     };
 

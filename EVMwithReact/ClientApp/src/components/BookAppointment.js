@@ -77,7 +77,7 @@ const BookAppointment = ({ onLogout, onBookSuccess }) => {
         };
 
         try {
-            const response = await fetch("https://localhost:7278/api/Appointment", {
+            const response = await fetch("/api/Appointment", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -88,6 +88,7 @@ const BookAppointment = ({ onLogout, onBookSuccess }) => {
 
             if (!response.ok) {
                 throw new Error("Network response was not ok");
+                console.log(response);
             }
 
             // Handle the response data as needed
@@ -113,9 +114,9 @@ const BookAppointment = ({ onLogout, onBookSuccess }) => {
                     required
                 >
                     <option value="">Select a Service</option>
-                    <option value="oil-change">Oil Change</option>
-                    <option value="tire-rotation">Tire Rotation</option>
-                    <option value="general-inspection">General Inspection</option>
+                    <option value="oil-change">Oil Change(80 CAD)</option>
+                    <option value="tire-rotation">Tire Rotation(100 CAD)</option>
+                    <option value="general-inspection">General Inspection(50 CAD)</option>
                 </select>
 
                 <label htmlFor="branchName">Branch Name:</label>

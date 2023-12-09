@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect } from "react";
 import LoginPage from "./components/LoginPage";
 import RegistrationPage from "./components/RegistrationPage";
-//import PaymentPage from "./components/PaymentPage";
+import PaymentPage from "./components/PaymentPage";
 import HomePage from "./components/HomePage";
 import cookie from "js-cookie";
 import BookAppointment from "./components/BookAppointment";
@@ -12,6 +12,10 @@ function App() {
 
     const checkLoggedIn = () => {
         return cookie.get("email") ? true : false;
+    };
+
+    const navigateToConfirm = () => {
+        setCurrentPage("confirm");
     };
 
     const navigateToPayment = () => {
@@ -49,6 +53,10 @@ function App() {
                 );
             //case "payment":
             //    return <PaymentPage />;
+            case "payment":
+                return <PaymentPage onPaymentSuccess={navigateToConfirm} />;
+            case "confirm":
+                return <ConfirmedPage onLogout={onLogout} onHomeClick={() => setCurrentPage("home")} />;
             case "login":
                 return (
                     <LoginPage

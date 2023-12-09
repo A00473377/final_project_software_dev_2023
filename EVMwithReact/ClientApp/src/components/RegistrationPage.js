@@ -2,13 +2,9 @@
 import "./RegistrationPage.css";
 import cookie from "js-cookie";
 
-const registrationpage_url = 'https://localhost:7278/api/Registration';  //stores the registration api url from .net core app
+const registrationpage_url = '/api/Registration';
 
-const RegistrationPage = ({
-    onLoginClick,
-    onRegistrationSuccess,
-    onHomeClick,
-}) => {
+const RegistrationPage = ({ onLoginClick, onRegistrationSuccess, onHomeClick }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -19,15 +15,57 @@ const RegistrationPage = ({
     const [lastName, setLastName] = useState("");
     const [userName, setUserName] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
-    const [address, setAddress] = useState("");
     const [phoneNoError, setPhoneNoError] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
+    const [country, setCountry] = useState("");
+    const [postalCode, setPostalCode] = useState("");
+    const [firstNameError, setFirstNameError] = useState("");
+    const [lastNameError, setLastNameError] = useState("");
+    const [cityError, setCityError] = useState("");
+    const [stateError, setStateError] = useState("");
+    const [countryError, setCountryError] = useState("");
+
+    const nameAndLocationRegex = /^[a-zA-Z\-'\s]+$/;
 
     const handleFirstNameChange = (event) => {
-        setFirstName(event.target.value);
+        const value = event.target.value;
+        setFirstName(value);
+        setFirstNameError(
+            nameAndLocationRegex.test(value) ? "" : "Invalid first name format."
+        );
     };
 
     const handleLastNameChange = (event) => {
-        setLastName(event.target.value);
+        const value = event.target.value;
+        setLastName(value);
+        setLastNameError(
+            nameAndLocationRegex.test(value) ? "" : "Invalid last name format."
+        );
+    };
+
+    const handleCityChange = (event) => {
+        const value = event.target.value;
+        setCity(value);
+        setCityError(
+            nameAndLocationRegex.test(value) ? "" : "Invalid city format."
+        );
+    };
+
+    const handleStateChange = (event) => {
+        const value = event.target.value;
+        setState(value);
+        setStateError(
+            nameAndLocationRegex.test(value) ? "" : "Invalid state format."
+        );
+    };
+
+    const handleCountryChange = (event) => {
+        const value = event.target.value;
+        setCountry(value);
+        setCountryError(
+            nameAndLocationRegex.test(value) ? "" : "Invalid country format."
+        );
     };
 
     const handleUserNameChange = (event) => {
@@ -40,8 +78,8 @@ const RegistrationPage = ({
         validatePhoneNo(newPhoneNo);
     };
 
-    const handleAddressChange = (event) => {
-        setAddress(event.target.value);
+    const handlePostalCodeChange = (event) => {
+        setPostalCode(event.target.value);
     };
 
     const handleEmailChange = (event) => {
@@ -65,22 +103,22 @@ const RegistrationPage = ({
     const validatePhoneNo = (phoneNo) => {
         const phoneNoRegex = /^[0-9]+$/;
         setPhoneNoError(
-            phoneNoRegex.test(phoneNo) ? "" : "Phone number must be numeric"
+            phoneNoRegex.test(phoneNo) ? "" : "Phone number must be numeric."
         );
     };
 
     const validateEmail = (email) => {
         if (!email) {
-            setEmailError("Email is required");
+            setEmailError("Email is required.");
         } else {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            setEmailError(emailRegex.test(email) ? "" : "Invalid email format");
+            setEmailError(emailRegex.test(email) ? "" : "Invalid email format.");
         }
     };
 
     const validatePassword = (password) => {
         if (!password) {
-            setPasswordError("Password is required");
+            setPasswordError("Password is required.");
         } else {
             const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
             setPasswordError(
@@ -93,7 +131,7 @@ const RegistrationPage = ({
 
     const validateConfirmPassword = (confirmPassword) => {
         setConfirmPasswordError(
-            confirmPassword === password ? "" : "Passwords do not match"
+            confirmPassword === password ? "" : "Passwords do not match."
         );
     };
 
@@ -109,8 +147,11 @@ const RegistrationPage = ({
             lastName &&
             phoneNo &&
             userName &&
-            address &&
             email &&
+            city &&
+            state &&
+            country &&
+            postalCode &&
             password &&
             confirmPassword &&
             !phoneNoError &&
@@ -129,7 +170,10 @@ const RegistrationPage = ({
                 UserName: userName,
                 Email: email,
                 PhoneNo: phoneNo,
-                Address: address,
+                City: city,
+                State: state,
+                Country: country,
+                PostalCode: postalCode,
                 Password: password,
             };
             fetch(registrationpage_url, {
@@ -150,114 +194,170 @@ const RegistrationPage = ({
                 });
         } else {
             console.log("Validation errors");
-            alert("Please Enter Correct Value!");
+            alert("Please enter correct values in all fields.");
         }
     };
 
-    return (
-        <div className="registration-container">
-            <form onSubmit={handleSubmit}>
-                <h2>Register for Car Services</h2>
-                <div>
-                    <label htmlFor="first-name">First Name:</label>
-                    <input
-                        type="text"
-                        id="first-name"
-                        value={firstName}
-                        onChange={handleFirstNameChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="last-name">Last Name:</label>
-                    <input
-                        type="text"
-                        id="last-name"
-                        value={lastName}
-                        onChange={handleLastNameChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="user-name">User Name:</label>
-                    <input
-                        type="text"
-                        id="user-name"
-                        value={userName}
-                        onChange={handleUserNameChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="phone-no">Phone No:</label>
-                    <input
-                        type="text"
-                        id="phone-no"
-                        value={phoneNo}
-                        onChange={handlePhoneNoChange}
-                        required
-                    />
-                    {phoneNoError && <div className="error">{phoneNoError}</div>}
-                </div>
-                <div>
-                    <label htmlFor="address">Address:</label>
-                    <input
-                        type="text"
-                        id="address"
-                        value={address}
-                        onChange={handleAddressChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={handleEmailChange}
-                        required
-                    />
-                    {emailError && <div className="error">{emailError}</div>}
-                </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        required
-                    />
-                    {passwordError && <div className="error">{passwordError}</div>}
-                </div>
-                <div>
-                    <label htmlFor="confirm-password">Confirm Password:</label>
-                    <input
-                        type="password"
-                        id="confirm-password"
-                        value={confirmPassword}
-                        onChange={handleConfirmPasswordChange}
-                        required
-                    />
-                    {confirmPasswordError && (
-                        <div className="error">{confirmPasswordError}</div>
-                    )}
-                </div>
-                <button type="submit">Register</button> { }
-                <p>
-                    Already have an account?{" "}
-                    <button type="button" onClick={onLoginClick}>
-                        Login here
-                    </button>
-                    <button onClick={onHomeClick} className="back-to-home-button">
-                        Back to Home
-                    </button>{" "}
-                    {/* New Back to Home button */}
-                </p>
-            </form>
-        </div>
-    );
+ return (
+            <div className="registration-container">
+                <form onSubmit={handleSubmit}>
+                    <h2>Register for Car Services</h2>
+
+                    {/* First Name Field */}
+                    <div>
+                        <label htmlFor="first-name">First Name:</label>
+                        <input
+                            type="text"
+                            id="first-name"
+                            value={firstName}
+                            onChange={handleFirstNameChange}
+                            required
+                        />
+                        {firstNameError && <div className="error">{firstNameError}</div>}
+                    </div>
+
+                    {/* Last Name Field */}
+                    <div>
+                        <label htmlFor="last-name">Last Name:</label>
+                        <input
+                            type="text"
+                            id="last-name"
+                            value={lastName}
+                            onChange={handleLastNameChange}
+                            required
+                        />
+                        {lastNameError && <div className="error">{lastNameError}</div>}
+                    </div>
+
+                    {/* User Name Field */}
+                    <div>
+                        <label htmlFor="user-name">User Name:</label>
+                        <input
+                            type="text"
+                            id="user-name"
+                            value={userName}
+                            onChange={handleUserNameChange}
+                            required
+                        />
+                    </div>
+
+                    {/* Phone Number Field */}
+                    <div>
+                        <label htmlFor="phone-no">Phone No:</label>
+                        <input
+                            type="text"
+                            id="phone-no"
+                            value={phoneNo}
+                            onChange={handlePhoneNoChange}
+                            required
+                        />
+                        {phoneNoError && <div className="error">{phoneNoError}</div>}
+                    </div>
+
+                    {/* City Field */}
+                    <div>
+                        <label htmlFor="city">City:</label>
+                        <input
+                            type="text"
+                            id="city"
+                            value={city}
+                            onChange={handleCityChange}
+                            required
+                        />
+                        {cityError && <div className="error">{cityError}</div>}
+                    </div>
+
+                    {/* State Field */}
+                    <div>
+                        <label htmlFor="state">State:</label>
+                        <input
+                            type="text"
+                            id="state"
+                            value={state}
+                            onChange={handleStateChange}
+                            required
+                        />
+                        {stateError && <div className="error">{stateError}</div>}
+                    </div>
+
+                    {/* Country Field */}
+                    <div>
+                        <label htmlFor="country">Country:</label>
+                        <input
+                            type="text"
+                            id="country"
+                            value={country}
+                            onChange={handleCountryChange}
+                            required
+                        />
+                        {countryError && <div className="error">{countryError}</div>}
+                    </div>
+
+                    {/* Postal Code Field */}
+                    <div>
+                        <label htmlFor="postal-code">Postal Code:</label>
+                        <input
+                            type="text"
+                            id="postal-code"
+                            value={postalCode}
+                            onChange={handlePostalCodeChange}
+                            required
+                        />
+                    </div>
+
+                    {/* Email Field */}
+                    <div>
+                        <label htmlFor="email">Email:</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={handleEmailChange}
+                            required
+                        />
+                        {emailError && <div className="error">{emailError}</div>}
+                    </div>
+
+                    {/* Password Field */}
+                    <div>
+                        <label htmlFor="password">Password:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            required
+                        />
+                        {passwordError && <div className="error">{passwordError}</div>}
+                    </div>
+
+                    {/* Confirm Password Field */}
+                    <div>
+                        <label htmlFor="confirm-password">Confirm Password:</label>
+                        <input
+                            type="password"
+                            id="confirm-password"
+                            value={confirmPassword}
+                            onChange={handleConfirmPasswordChange}
+                            required
+                        />
+                        {confirmPasswordError && <div className="error">{confirmPasswordError}</div>}
+                    </div>
+
+                    <button type="submit">Register</button>
+
+                    <p>
+                        Already have an account?{" "}
+                        <button type="button" onClick={onLoginClick}>
+                            Login here
+                        </button>
+                        <button onClick={onHomeClick} className="back-to-home-button">
+                            Back to Home
+                        </button>
+                    </p>
+                </form>
+            </div>
+            );
 };
 
-export default RegistrationPage;
+            export default RegistrationPage;

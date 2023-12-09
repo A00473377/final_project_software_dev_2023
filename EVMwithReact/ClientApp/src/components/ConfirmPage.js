@@ -1,36 +1,27 @@
 ﻿import React from 'react';
 import './ConfirmPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import cookie from 'js-cookie'; // Ensure you have imported cookie
 
-const ConfirmedPage = (props) => {
-    const { firstName, lastName, appointmentDate, appointmentTime } = props;
+const ConfirmedPage = ({ onLogout }) => {
+
+    const handleLogout = () => {
+        cookie.remove("email");
+        onLogout();
+    };
 
     return (
         <div className="container mt-5">
             <div>
-                <h1>YOUR APPOINTMENT BOOKING IS COFIRMED!</h1>
-                <p>Please note down the details for your convenience.</p>
+                <h1>YOUR APPOINTMENT BOOKING IS CONFIRMED!</h1>
+                <p>Your booking details have been successfully recorded.</p>
             </div>
 
-            <div>
-                <div className="row">
-                    <div className="col-sm-6 name-font">
-                        <h3>First Name:</h3>
-                        <p>{firstName}</p>
-                    </div>
-                    <div className="col-sm-6 name-font">
-                        <h3>Last Name:</h3>
-                        <p>{lastName}</p>
-                    </div>
-                    <div className="col-sm-6 name-font">
-                        <h3>Date:</h3>
-                        <p>{appointmentDate}</p>
-                    </div>
-                    <div className="col-sm-6 name-font">
-                        <h3>Time:</h3>
-                        <p>{appointmentTime}</p>
-                    </div>
-                </div>
+            {/* Logout Button */}
+            <div className="logout-button">
+                <button onClick={handleLogout} className="btn btn-primary">
+                    Logout
+                </button>
             </div>
         </div>
     );
