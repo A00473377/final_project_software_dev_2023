@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EVMwithReact.Data;
 using EVMwithReact.Data.Models;
+using Microsoft.IdentityModel.Tokens;
 
 namespace EVMwithReact.Controllers
 {
@@ -47,6 +48,27 @@ namespace EVMwithReact.Controllers
 
             return Ok(user);
         }
+        // GET: api/Registration/CheckUser
+        [HttpPost("CheckUser")]
+        public async Task<IActionResult> CheckUser(CheckUserLogin checkUser)
+        {
+            if (checkUser == null || !ModelState.IsValid)
+            {
+                return BadRequest("Username and password are required");
+            }
+
+            var existingUser = await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == checkUser.Email && u.Password == checkUser.Password);
+
+            if (existingUser != null)
+            {
+                // User with the given username and password exists
+                return Ok("User exists");
+            }
+
+            // User does not exist, you can return a success response or any other appropriate response
+            return NotFound("User does not exist");
+        }
 
         // POST: api/Registration
         [HttpPost]
@@ -58,6 +80,16 @@ namespace EVMwithReact.Controllers
             }
 
             _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            var checkUserLogins = new CheckUserLogin
+            {
+                Email = user.Email,
+                Password = user.Password
+                // You can add other fields as needed
+            };
+
+            _context.CheckUserLogins.Add(checkUserLogins);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetUser), new { id = user.UserId }, user);
