@@ -2,7 +2,7 @@
 import "./LoginPage.css";
 import axios from "axios";
 import cookie from "js-cookie";
-import "./App";
+//import "./src/App";
 
 function LoginPage({ onRegisterClick, onLoginSuccess }) {
     const [email, setEmail] = useState("");
